@@ -1,7 +1,6 @@
-import java.io.*;
 import java.lang.*;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+
 
 public class Encryption{
     public static String encrypt(String text, String keyWord)

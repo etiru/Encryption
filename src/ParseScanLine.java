@@ -1,40 +1,31 @@
 
 public class ParseScanLine {
-    private String flag;
-    private String keyEncryption;
-    private String inputNameFile;
-    private String outputNameFile;
+    public String flag;
+    public String keyEncryption;
+    public String inputNameFile;
+    public String outputNameFile;
 
-    private ParseScanLine(String flag, String keyEncryption, String inputNameFile, String outputNameFile){
-
+    public ParseScanLine(){
+        System.out.println("error");
     }
 
     public ParseScanLine(String commandLine) {
+        if(!commandLine.matches
+                ("^ciphxor *(-c|-d) *[\\dAaBbCcDdEeFf]+ *[A-Za-z]+(.[A-Za-z]+)? *((-o) *[A-Za-z]+(.[A-Za-z]+))?$"))
+            throw new IllegalArgumentException("error");
         String[] commandLineSplit = commandLine.split(" ");
         int commandLineSize = commandLineSplit.length;
+
         flag = commandLineSplit[1];
         keyEncryption = commandLineSplit[2];
         inputNameFile = commandLineSplit[3];
-        if (commandLineSize == 5)
+        if (commandLineSize == 6)
             outputNameFile = commandLineSplit[5];
-        else outputNameFile = null;
+        else outputNameFile = inputNameFile + "encry";
+        begin();
     }
 
-    public String getFlag(){
-        return flag;
+    private void begin(){
+        FileInputOutput begin = new FileInputOutput(inputNameFile, outputNameFile, keyEncryption);
     }
-
-    public String getKeyEncryption(){
-        return keyEncryption;
-    }
-
-    public String getInputNameFile() {
-        return inputNameFile;
-    }
-
-    public String getOutputNameFile() {
-        return outputNameFile;
-    }
-
-    FileInputOutput init;
 }
